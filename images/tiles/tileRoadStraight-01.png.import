@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/tileRoadStraight-01.png-a71d038c39c0dc04ed302d49d8debecb.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://images/tiles/tileRoadStraight-01.png"
+dest_files=[ "res://.import/tileRoadStraight-01.png-a71d038c39c0dc04ed302d49d8debecb.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=false
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=50
+detect_3d=false
+svg/scale=1.0
