@@ -1,35 +1,47 @@
-extends Node2D
+extends KinematicBody2D
 
-var direction
-var velocity = 16
+var life = 100
+var armor
+var damage
+
 var movCoolDownTimer = 0.0
 var movDifficulty = 0.2
+var currTile
+
+var mapNode
+var fogNode
+
 
 func _ready():
 #	posicion inicial en el centro de la pantalla:
-	position = Vector2(Global.scrnSize.x/2, Global.scrnSize.y/2)
-	
+	mapNode = get_parent().get_node("Mapa")
+	fogNode = get_parent().get_node("Fog")
 
 func _physics_process(delta):
 #	Seteamos posicion global del jugador en Global
 	Global.playerGlobalPos = self.global_position
+	currTile = mapNode.get_tile(self.position)
+
+	
 	
 	movCoolDownTimer += delta
-#	movimiento normalizado con timer:
+	
+#	movimiento con cooldown:
 	if movCoolDownTimer > movDifficulty:
-		var currPos = position
 		if Input.is_action_pressed("ui_up"):
-			position += Vector2(0, -1).normalized() * velocity
+			move("up")
 			movCoolDownTimer = 0
 		if Input.is_action_pressed("ui_down"):
-			position += Vector2(0, 1).normalized() * velocity
+			move("down")
 			movCoolDownTimer = 0
 		if Input.is_action_pressed("ui_right"):
-			position += Vector2(1, 0).normalized() * velocity
+			move("right")
 			movCoolDownTimer = 0
 		if Input.is_action_pressed("ui_left"):
-			position += Vector2(-1, 0).normalized() * velocity
+			move("left")
 			movCoolDownTimer = 0
+		
+	
 
 	
 #	zoom-in/zoom-out:
@@ -44,7 +56,50 @@ func _physics_process(delta):
 		get_node("PlayerCam").zoom = Vector2(0.5, 0.5)
 
 #	Restricciones de movimiento:
-	if Global.currTile == 0:
+	if currTile == 3:
+		movDifficulty = 0.4
+	else:
 		movDifficulty = 0.2
-	elif Global.currTile == 3:
-		movDifficulty = 0.3
+
+# Funcion para moverse, checkea la tile objetivo para ver si se puede ir
+func move(dir):
+	var vec = Vector2()
+	var targetTile
+	
+	match dir:
+		"up":
+			vec = Vector2(0, -16)
+		"down":
+			vec = Vector2(0, 16)
+		"right":
+			vec = Vector2(16, 0)
+		"left":
+			vec = Vector2(-16, 0)
+	
+	targetTile = mapNode.get_tile(self.position + vec)
+	
+	if targetTile != 2 and targetTile != 4:
+		for n in range(16):
+			self.position += vec.normalized()
+	else:
+		return
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
