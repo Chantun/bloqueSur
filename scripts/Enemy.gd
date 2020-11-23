@@ -1,34 +1,15 @@
 extends Node2D
 
-var life
+#	Este nodo se va a instanciar dentro de Combat cuando se instancie
+#	va a tomar los parametros del script de enemies, un diccionario
+
+var hp
 var armor
-var damage = 5
-
 var patron = []
-
-var attTimer = 100
-var defTimer
-var iddleTimer
+var nme
+var desc
 
 func _ready():
-	#Tomar del objeto enemies todas las variables
 	pass
 	
 
-func _physics_process(delta):
-	#Llamar a la funcion que corresponda
-	
-	attTimer -= 1
-	
-	if attTimer <= 0:
-		attack()
-		attTimer = 100
-
-func attack():
-	get_parent().get_node("PlayerNew").life -= damage
-	
-func defend():
-	pass
-	
-func iddle():
-	pass

@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var life = 100
 var armor
-var damage
+var damage = 2
 
 var movCoolDownTimer = 0.0
 var movDifficulty = 0.2
@@ -13,20 +13,22 @@ var fogNode
 
 
 func _ready():
-#	posicion inicial en el centro de la pantalla:
+
 	mapNode = get_parent().get_node("Mapa")
 	fogNode = get_parent().get_node("Fog")
 
 func _physics_process(delta):
-#	Seteamos posicion global del jugador en Global
-	Global.playerGlobalPos = self.global_position
+#	actualiza la info del player en el singleton
+	PlayerInfoInv.playerHp = life
+	PlayerInfoInv.playerDam = damage
+	PlayerInfoInv.playerArmor = armor
+	PlayerInfoInv.playerGlobalPos = self.global_position
+	
+#	llama a la funcion del nodo de mapa para identificar en que tile se encuentra
 	currTile = mapNode.get_tile(self.position)
-
 	
-	
-	movCoolDownTimer += delta
-	
-#	movimiento con cooldown:
+#	movimiento con cooldown
+	movCoolDownTimer += delta	
 	if movCoolDownTimer > movDifficulty:
 		if Input.is_action_pressed("ui_up"):
 			move("up")
@@ -40,11 +42,14 @@ func _physics_process(delta):
 		if Input.is_action_pressed("ui_left"):
 			move("left")
 			movCoolDownTimer = 0
-		
+			
+#	Restricciones de movimiento segun tile en el que este
+	if currTile == 3:
+		movDifficulty = 0.4
+	else:
+		movDifficulty = 0.2
 	
-
-	
-#	zoom-in/zoom-out:
+#	zoom-in/zoom-out de la camara:
 	if Input.is_action_just_pressed("ui_plus"):
 		get_node("PlayerCam").zoom -= Vector2(0.1, 0.1)
 	if Input.is_action_just_pressed("ui_minus"):
@@ -54,12 +59,6 @@ func _physics_process(delta):
 		get_node("PlayerCam").zoom = Vector2(1.5, 1.5)
 	if get_node("PlayerCam").zoom < Vector2(0.5, 0.5):
 		get_node("PlayerCam").zoom = Vector2(0.5, 0.5)
-
-#	Restricciones de movimiento:
-	if currTile == 3:
-		movDifficulty = 0.4
-	else:
-		movDifficulty = 0.2
 
 # Funcion para moverse, checkea la tile objetivo para ver si se puede ir
 func move(dir):

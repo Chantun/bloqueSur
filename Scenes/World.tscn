@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://images/tiles/new/base.png" type="Texture" id=1]
-[ext_resource path="res://images/tiles/new/desert.png" type="Texture" id=2]
-[ext_resource path="res://images/tiles/new/mountain.png" type="Texture" id=3]
-[ext_resource path="res://images/tiles/new/tree.png" type="Texture" id=4]
-[ext_resource path="res://images/tiles/new/water.png" type="Texture" id=5]
-[ext_resource path="res://images/tiles/new/roadCurve.png" type="Texture" id=6]
-[ext_resource path="res://images/tiles/new/straighRoad.png" type="Texture" id=7]
-[ext_resource path="res://images/tiles/new/ruins1.png" type="Texture" id=8]
+[ext_resource path="res://images/tiles/base.png" type="Texture" id=1]
+[ext_resource path="res://images/tiles/desert.png" type="Texture" id=2]
+[ext_resource path="res://images/tiles/mountain.png" type="Texture" id=3]
+[ext_resource path="res://images/tiles/tree.png" type="Texture" id=4]
+[ext_resource path="res://images/tiles/water.png" type="Texture" id=5]
+[ext_resource path="res://images/tiles/roadCurve.png" type="Texture" id=6]
+[ext_resource path="res://images/tiles/straighRoad.png" type="Texture" id=7]
+[ext_resource path="res://images/tiles/ruins1.png" type="Texture" id=8]
 [ext_resource path="res://scripts/Mapa.gd" type="Script" id=9]
 [ext_resource path="res://scripts/Fog.gd" type="Script" id=10]
 [ext_resource path="res://Scenes/PlayerNew.tscn" type="PackedScene" id=11]
@@ -116,6 +116,7 @@ tile_data = PoolIntArray( -327655, 4, 0, -327654, 4, 0, -262140, 0, 0, -262120, 
 script = ExtResource( 9 )
 
 [node name="Fog" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1

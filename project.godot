@@ -17,12 +17,11 @@ _global_script_class_icons={
 
 config/name="RPGtext"
 run/main_scene="res://Scenes/World.tscn"
-config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://scripts/Global.gd"
-Enemies="*res://scripts/Enemies.gd"
+PlayerInfoInv="*res://scripts/PlayerInfoInv.gd"
 
 [display]
 
